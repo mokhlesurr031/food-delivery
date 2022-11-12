@@ -2,10 +2,16 @@ package main
 
 import (
 	"fmt"
+	"food-delivery/database"
+	"food-delivery/migrations"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"net/http"
 )
 
 func main() {
+	database.Init()
+	migrations.Migrate()
+
 	handler := http.NewServeMux()
 	handler.HandleFunc("/api/hello", SayHello)
 
